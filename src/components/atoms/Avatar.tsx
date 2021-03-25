@@ -9,7 +9,7 @@ interface Props {
 }
 
 export default function Avatar(props:Props) {
-    const {size=220,source,style} = props;
+    const {size=70,source,style} = props;
     return(
         <PaperAvatar.Image size={size} source={source} style={style} />
     )

@@ -1,24 +1,26 @@
-import React, {useState} from "react";
-import {FlatList, Image, SafeAreaView, ScrollView, StyleSheet, Text, View} from "react-native";
+import React from "react";
+import {SafeAreaView, ScrollView, StyleSheet, Text, View} from "react-native";
 import {Avatar} from "../../atoms";
-import Wish from "../../molecules/Wish";
+import {WishList} from "../../organisms";
 
 const styles = StyleSheet.create({
     container:{
         flex:1,
-        justifyContent:'center',
-        alignItems:'center',
+        justifyContent:'flex-start',
     },
     imageIconContainer: {
-        justifyContent: 'center',
-        alignItems: 'center',
+        justifyContent: 'flex-start',
+        flexDirection:'row',
         marginTop: 20,
         marginBottom: 40,
+    },
+    nameContainer:{
+        justifyContent: 'center',
+        marginLeft:30,
     },
     nameText: {
         color: 'black',
         fontSize: 20,
-        marginTop: 5,
     },
 });
 
@@ -29,20 +31,16 @@ const state = {
 const avatar = require('../../../../assets/person.png');
 
 export default function Home() {
-
     return(
         <SafeAreaView style={styles.container}>
             <View style={styles.imageIconContainer}>
                 <Avatar source={avatar}/>
-                <Text style={styles.nameText}>sample</Text>
+                <View style={styles.nameContainer}>
+                    <Text style={styles.nameText}>sample</Text>
+                </View>
             </View>
             <ScrollView>
-                <FlatList
-                    data={state.list}
-                    numColumns={2}
-                    renderItem={ ({ item, index }) => (<Wish index={index} uri="https://source.unsplash.com/random'" />
-                    )}
-                />
+                <WishList list={state.list}/>
             </ScrollView>
         </SafeAreaView>
     )
