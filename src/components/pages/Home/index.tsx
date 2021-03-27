@@ -4,9 +4,11 @@ import {Avatar} from "../../atoms";
 import {WishList} from "../../organisms";
 
 const styles = StyleSheet.create({
-    container:{
-        flex:1,
-        justifyContent:'flex-start',
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     imageIconContainer: {
         justifyContent: 'flex-start',

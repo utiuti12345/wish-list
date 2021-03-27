@@ -1,11 +1,18 @@
 import React from "react";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
+import {createStackNavigator,StackCardInterpolationProps} from "@react-navigation/stack";
 import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
-import {HOME, USER_INFO} from "../../constants/path";
-import Home from "../../components/pages/Home";
-import UserInfo from "../../components/pages/UserInfo";
+import {HOME, LOADING, USER_INFO} from "../../constants/path";
+import {Home,Loading,UserInfo} from "../../components/pages";
+import * as UiContext from "../../contexts/ui";
 
 const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
+const forFade = ({current}:StackCardInterpolationProps) => ({
+    cardStyle:{
+        opacity:current.progress
+    }
+});
 
 function TabRoutes() {
     return(
@@ -29,3 +36,30 @@ function TabRoutes() {
         </Tab.Navigator>
     )
 }
+
+function switchingAuthStatus(status:UiContext.Status) {
+    switch (status) {
+        case UiContext.Status.AUTHORIZED:
+            return <Stack.Screen name={HOME} component={TabRoutes}/>;
+        case UiContext.Status.FIRST_OPEN:
+            return <Stack.Screen name={HOME} component={Home}/>;
+        case UiContext.Status.LOADING:
+            return <Stack.Screen name={HOME} component={Home}/>;
+        case UiContext.Status.UN_AUTHORIZED:
+            return <Stack.Screen name={HOME} component={Home}/>;
+    }
+}
+
+function AuthWihRoutes() {
+    const uiContext = React.useContext(UiContext.Context);
+    return (
+        <Stack.Navigator initialRouteName={LOADING} headerMode="none" screenOptions={{cardStyleInterpolator:forFade}}>
+            {uiContext.applicationState !== UiContext.Status.LOADING
+                ? (switchingAuthStatus(uiContext.applicationState))
+                : (<Stack.Screen name={LOADING} component={Loading} /> )
+            }
+        </Stack.Navigator>
+    )
+}
+
+export default AuthWihRoutes;
