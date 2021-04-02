@@ -34,3 +34,13 @@ export function factory(wish:Values):Model {
     }
 }
 
+export function change(wish:Model,newValue:Values):Model {
+    assertIsDefined(newValue.title);
+
+    const now = new Date().toISOString();
+    return {
+        ...wish,
+        ...newValue,
+        updateAt:now,
+    }
+}
