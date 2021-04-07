@@ -1,5 +1,5 @@
 import {v4 as generatedUuid} from "react-native-uuid";
-import {assertIsDefined} from "../lib/assert";
+import {assertIsDefined} from "../../lib/assert";
 
 export interface Model {
     readonly id:string;

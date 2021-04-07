@@ -42,7 +42,7 @@ export default function Home() {
     },[navigate]);
 
     return(
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             <View style={styles.imageIconContainer}>
                 <Avatar source={avatar}/>
                 <View style={styles.nameContainer}>
@@ -55,6 +55,6 @@ export default function Home() {
             <Pressable onPress={onPress}>
                 <Icon color="BLACK" size={24} name="plus"/>
             </Pressable>
-        </View>
+        </SafeAreaView>
     )
 }
