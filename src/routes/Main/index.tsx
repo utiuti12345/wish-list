@@ -3,9 +3,9 @@ import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import {createStackNavigator,StackCardInterpolationProps} from "@react-navigation/stack";
 import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
 import {HOME, INPUT, LOADING, USER_INFO} from "../../constants/path";
-import {Home,Loading,UserInfo} from "../../components/pages";
+import {Loading,UserInfo,Input} from "../../components/pages";
 import * as UiContext from "../../contexts/ui";
-import Input from "../../components/pages/Input";
+import Home from "./Home";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -30,12 +30,6 @@ function TabRoutes() {
                                backgroundColor: '#333333',
                            },
                        }}
-                       // screenOptions={(props: any) => {
-                       //     const routeName = getFocusedRouteNameFromRoute(props.route);
-                       //     return {
-                       //         tabBarVisible: routeName !== USER_INFO
-                       //     }
-                       // }}
         >
             <Tab.Screen name={HOME} component={Home}/>
             <Tab.Screen name={USER_INFO} component={UserInfo}/>
@@ -57,11 +51,11 @@ function switchingAuthStatus(status:UiContext.Status) {
         case UiContext.Status.AUTHORIZED:
             return <Stack.Screen name={HOME} component={TabWithModalRoutes}/>;
         case UiContext.Status.FIRST_OPEN:
-            return <Stack.Screen name={HOME} component={Home}/>;
+            return <Stack.Screen name={HOME} component={Loading}/>;
         case UiContext.Status.LOADING:
-            return <Stack.Screen name={HOME} component={Home}/>;
+            return <Stack.Screen name={HOME} component={Loading}/>;
         case UiContext.Status.UN_AUTHORIZED:
-            return <Stack.Screen name={HOME} component={Home}/>;
+            return <Stack.Screen name={HOME} component={Loading}/>;
     }
 }
 

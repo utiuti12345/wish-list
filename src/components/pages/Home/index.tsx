@@ -1,10 +1,12 @@
 import React from "react";
 import {Pressable, SafeAreaView, ScrollView, StyleSheet, Text, View} from "react-native";
+import {State} from "../../molecules/Wish";
 import {useNavigation} from "@react-navigation/native";
 import {Avatar} from "../../atoms";
 import {WishList} from "../../organisms";
 import Icon from "react-native-vector-icons/FontAwesome";
 import {INPUT} from "../../../constants/path";
+import AppbarExample from "react-native-paper/lib/typescript/example/src/Examples/AppbarExample";
 
 const styles = StyleSheet.create({
     container: {
@@ -35,7 +37,21 @@ const state = {
 
 const avatar = require('../../../../assets/person.png');
 
+export interface Props {
+    wishList:[];
+}
+
+const data:Array<State> = [
+    {
+        id:"12345",
+        title:"トレーニングウエア ソックス",
+        imageUrl:"https://images-na.ssl-images-amazon.com/images/P/B01BM6FQQS.09.MZZZZZZZ",
+    },
+]
+
 export default function Home() {
+    //const {wishList} = props;
+
     const {navigate} = useNavigation();
     const onPress = React.useCallback(() => {
         navigate(INPUT)
@@ -50,7 +66,7 @@ export default function Home() {
                 </View>
             </View>
             <ScrollView>
-                <WishList list={state.list}/>
+                <WishList wishList={data}/>
             </ScrollView>
             <Pressable onPress={onPress}>
                 <Icon color="BLACK" size={24} name="plus"/>

@@ -9,7 +9,3 @@ export function createInitialState(){
 }
 
 export type AppState = Readonly<ReturnType<typeof createInitialState>>;
-
-export default combineReducers<AppState>({
-    wishList: WishList.default,
-});

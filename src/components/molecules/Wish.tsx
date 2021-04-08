@@ -1,5 +1,7 @@
 import React from "react";
 import {Image, StyleSheet,TouchableOpacity} from "react-native";
+import {useNavigation} from "@react-navigation/native";
+import {DETAIL} from "../../constants/path";
 
 const styles = StyleSheet.create({
     image:{
@@ -13,17 +15,28 @@ const styles = StyleSheet.create({
     }
 });
 
+export interface State {
+    id:string;
+    title:string;
+    imageUrl?:string;
+}
+
 interface Props {
-    index:number;
-    uri:string;
+    wish:State
 }
 
 export default function Wish(props:Props) {
-    const {index,uri} = props;
+    const {wish} = props;
+    const {navigate} = useNavigation();
+
+    const onPress = React.useCallback(() => {
+        navigate(DETAIL,wish)
+    },[navigate]);
+
     return(
-        <TouchableOpacity onPress={() => console.log("aaaaa")}>
-            <Image source={{ uri: uri }}
-                   key={index}
+        <TouchableOpacity onPress={onPress}>
+            <Image source={{ uri: wish.imageUrl }}
+                   key={wish.id}
                    style={styles.image}
             />
         </TouchableOpacity>
