@@ -1,6 +1,7 @@
 import React, {useCallback, useState} from "react";
 import {Image, SafeAreaView, StyleSheet, Text, TextInput} from "react-native";
 import {RouteProp, useRoute} from "@react-navigation/native";
+import TextField from "../../atoms/TextField";
 
 const styles = StyleSheet.create({
     image:{
@@ -31,7 +32,7 @@ export default function Detail() {
 
     return (
         <SafeAreaView>
-            <TextInput value={value} onChangeText={onChange}></TextInput>
+            <TextField label="text" value={value} onChangeText={onChange} secureTextEntry={false}></TextField>
             <Image source={{ uri: imageUrl }}
                    key={id}
                    style={styles.image}
