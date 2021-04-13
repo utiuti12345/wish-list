@@ -6,6 +6,8 @@ import {HOME, INPUT, LOADING, USER_INFO} from "../../constants/path";
 import {Loading,UserInfo,Input} from "../../components/pages";
 import * as UiContext from "../../contexts/ui";
 import Home from "./Home";
+import Icon from "../../components/atoms/Icon";
+import {StyleSheet} from "react-native";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -14,6 +16,13 @@ const forFade = ({current}:StackCardInterpolationProps) => ({
     cardStyle:{
         opacity:current.progress
     }
+});
+
+const styles = StyleSheet.create({
+    icon: {
+        width: 32,
+        height: 32,
+    },
 });
 
 const cardStyle = {
@@ -31,8 +40,18 @@ function TabRoutes() {
                            },
                        }}
         >
-            <Tab.Screen name={HOME} component={Home}/>
-            <Tab.Screen name={USER_INFO} component={UserInfo}/>
+            <Tab.Screen name={HOME} component={Home} options={{
+                tabBarLabel: 'Home',
+                tabBarIcon: () => (
+                    <Icon name="person" fill="#8F9BB3" style={styles.icon}/>
+                ),
+            }}/>
+            <Tab.Screen name={USER_INFO} component={UserInfo} options={{
+                tabBarLabel: 'UserInfo',
+                tabBarIcon: () => (
+                    <Icon name="person" fill="#8F9BB3" style={styles.icon}/>
+                ),
+            }}/>
         </Tab.Navigator>
     )
 }

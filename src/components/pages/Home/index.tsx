@@ -4,9 +4,8 @@ import {State} from "../../molecules/Wish";
 import {useNavigation} from "@react-navigation/native";
 import {Avatar} from "../../atoms";
 import {WishList} from "../../organisms";
-import Icon from "react-native-vector-icons/FontAwesome";
 import {INPUT} from "../../../constants/path";
-import AppbarExample from "react-native-paper/lib/typescript/example/src/Examples/AppbarExample";
+import {IconButton} from "../../molecules";
 
 const styles = StyleSheet.create({
     container: {
@@ -29,6 +28,10 @@ const styles = StyleSheet.create({
         color: 'black',
         fontSize: 20,
     },
+    icon: {
+        width: 32,
+        height: 32,
+    },
 });
 
 const state = {
@@ -42,6 +45,11 @@ export interface Props {
 }
 
 const data:Array<State> = [
+    {
+        id:"12345",
+        title:"トレーニングウエア ソックス",
+        imageUrl:"https://images-na.ssl-images-amazon.com/images/P/B01BM6FQQS.09.MZZZZZZZ",
+    },
     {
         id:"12345",
         title:"トレーニングウエア ソックス",
@@ -65,12 +73,10 @@ export default function Home() {
                     <Text style={styles.nameText}>sample</Text>
                 </View>
             </View>
-            <ScrollView>
+            <IconButton name="plus-circle" fill="#8F9BB3" style={styles.icon} onPress={onPress}/>
+            <ScrollView style={{flex:1}}>
                 <WishList wishList={data}/>
             </ScrollView>
-            <Pressable onPress={onPress}>
-                <Icon color="BLACK" size={24} name="plus"/>
-            </Pressable>
         </SafeAreaView>
     )
 }
