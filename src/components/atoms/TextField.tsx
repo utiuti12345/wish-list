@@ -6,10 +6,30 @@ interface Props{
     value:string;
     onChangeText?:(str:string) => void;
     secureTextEntry?: boolean;
+    autoCompleteType?:
+        | 'off'
+        | 'username'
+        | 'password'
+        | 'email'
+        | 'name'
+        | 'tel'
+        | 'street-address'
+        | 'postal-code'
+        | 'cc-number'
+        | 'cc-exp'
+        | 'cc-exp-month'
+        | 'cc-exp-year';
+    keyboardType?:
+        | 'default'
+        | 'email-address'
+        | 'numeric'
+        | 'phone-pad'
+        | 'number-pad'
+        | 'decimal-pad';
 }
 
 export default function TextField(props:Props){
-    const {label,value,onChangeText = () => {},secureTextEntry} = props;
+    const {label,value,onChangeText = () => {},secureTextEntry,autoCompleteType,keyboardType} = props;
 
     return(
         <Input
@@ -17,6 +37,8 @@ export default function TextField(props:Props){
             value={value}
             onChangeText={onChangeText}
             secureTextEntry={secureTextEntry}
+            autoCompleteType={autoCompleteType}
+            keyboardType={keyboardType}
         />
     )
 }

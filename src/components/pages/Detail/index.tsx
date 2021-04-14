@@ -19,20 +19,27 @@ interface Params{
     id:string;
     title:string;
     imageUrl?:string;
+    price:string;
 }
 
 export default function Detail() {
     const {params} = useRoute<RouteProp<Record<string, Params>, string>>();
-    const {id,title,imageUrl} = params;
+    const {id,title,imageUrl,price} = params;
 
-    const [value,setValue] = useState(title);
-    const onChange = useCallback((newValue) => {
-        setValue(newValue);
-    },[setValue]);
+    const [titleValue,setTitle] = useState(title);
+    const onChangeTitle = useCallback((newValue) => {
+        setTitle(newValue);
+    },[setTitle]);
+
+    const [priceValue,setPrice] = useState(price);
+    const onChangePrice = useCallback((newValue) => {
+        setPrice(newValue);
+    },[setPrice]);
 
     return (
         <SafeAreaView>
-            <TextField label="text" value={value} onChangeText={onChange} secureTextEntry={false}></TextField>
+            <TextField label="text" value={titleValue} onChangeText={onChangeTitle} secureTextEntry={false}/>
+            <TextField label="price" value={priceValue} onChangeText={onChangePrice} secureTextEntry={false} keyboardType="numeric"/>
             <Image source={{ uri: imageUrl }}
                    key={id}
                    style={styles.image}

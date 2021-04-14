@@ -19,6 +19,7 @@ export interface State {
     id:string;
     title:string;
     imageUrl?:string;
+    price:string;
 }
 
 interface Props {

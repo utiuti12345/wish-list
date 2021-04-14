@@ -34,10 +34,6 @@ const styles = StyleSheet.create({
     },
 });
 
-const state = {
-    list:[0,1,2,3,4,5,6,7,8,9]
-};
-
 const avatar = require('../../../../assets/person.png');
 
 export interface Props {
@@ -49,12 +45,13 @@ const data:Array<State> = [
         id:"12345",
         title:"トレーニングウエア ソックス",
         imageUrl:"https://images-na.ssl-images-amazon.com/images/P/B01BM6FQQS.09.MZZZZZZZ",
+        price:"1000",
     },
-    {
-        id:"12345",
-        title:"トレーニングウエア ソックス",
-        imageUrl:"https://images-na.ssl-images-amazon.com/images/P/B01BM6FQQS.09.MZZZZZZZ",
-    },
+    // {
+    //     id:"12345",
+    //     title:"トレーニングウエア ソックス",
+    //     imageUrl:"https://images-na.ssl-images-amazon.com/images/P/B01BM6FQQS.09.MZZZZZZZ",
+    // },
 ]
 
 export default function Home() {
