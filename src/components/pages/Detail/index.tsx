@@ -1,6 +1,7 @@
 import React, {useCallback, useState} from "react";
 import {Image, SafeAreaView, StyleSheet, Text, TextInput} from "react-native";
 import {RouteProp, useRoute} from "@react-navigation/native";
+import {fetchImageUrl} from "../../../lib/amazon";
 import TextField from "../../atoms/TextField";
 
 const styles = StyleSheet.create({
@@ -20,11 +21,12 @@ interface Params{
     title:string;
     imageUrl?:string;
     price:string;
+    url:string;
 }
 
 export default function Detail() {
     const {params} = useRoute<RouteProp<Record<string, Params>, string>>();
-    const {id,title,imageUrl,price} = params;
+    const {id,title,imageUrl,price,url} = params;
 
     const [titleValue,setTitle] = useState(title);
     const onChangeTitle = useCallback((newValue) => {
@@ -36,11 +38,20 @@ export default function Detail() {
         setPrice(newValue);
     },[setPrice]);
 
+    const [urlValue,setUrl] = useState(url);
+    const [imageUrlValue,setImageUrl] = useState(imageUrl);
+    const onChangeUrl = useCallback((newValue) => {
+        setUrl(newValue);
+        const imageUrl = fetchImageUrl(newValue);
+        setImageUrl(imageUrl);
+    },[setUrl]);
+
     return (
         <SafeAreaView>
             <TextField label="text" value={titleValue} onChangeText={onChangeTitle} secureTextEntry={false}/>
             <TextField label="price" value={priceValue} onChangeText={onChangePrice} secureTextEntry={false} keyboardType="numeric"/>
-            <Image source={{ uri: imageUrl }}
+            <TextField label="url" value={urlValue} onChangeText={onChangeUrl} secureTextEntry={false}/>
+            <Image source={{ uri: imageUrlValue }}
                    key={id}
                    style={styles.image}
             />
