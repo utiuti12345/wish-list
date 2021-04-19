@@ -1,10 +1,12 @@
 import React from "react";
 import { Input } from '@ui-kitten/components';
+import {ViewStyle} from "react-native";
 
 interface Props{
     label:string;
     value:string;
     onChangeText?:(str:string) => void;
+    style?:ViewStyle;
     secureTextEntry?: boolean;
     autoCompleteType?:
         | 'off'
@@ -29,10 +31,11 @@ interface Props{
 }
 
 export default function TextField(props:Props){
-    const {label,value,onChangeText = () => {},secureTextEntry,autoCompleteType,keyboardType} = props;
+    const {label,value,onChangeText = () => {},style,secureTextEntry,autoCompleteType,keyboardType} = props;
 
     return(
         <Input
+            style={style}
             label={label}
             value={value}
             onChangeText={onChangeText}
