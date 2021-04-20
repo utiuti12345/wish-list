@@ -30,12 +30,12 @@ export function add(wish:Wish.Model) {
 export type Action = | Readonly<ReturnType<typeof set>>
                     | Readonly<ReturnType<typeof add>>
 
-export default function reducer(state=createInitialState(),action:Action){
+export default function reducer(state= createInitialState(),action:Action){
     switch (action.type) {
         case SET:
             return action.payload.wishList;
         case ADD:
-            return action.payload.wish;
+            return WishList.add(state,action.payload.wish);
         default:
             return state;
     }

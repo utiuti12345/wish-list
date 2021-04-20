@@ -6,7 +6,7 @@ export interface Model {
     readonly title: string;
     readonly imageUrl?:string;
     readonly detail?: string;
-    readonly price?: number;
+    readonly price?: string;
     readonly createdAt:string;
     readonly updateAt:string;
 }
@@ -15,10 +15,11 @@ export interface Values {
     readonly title:string;
     readonly imageUrl?:string;
     readonly detail?: string;
-    readonly price?: number;
+    readonly price?: string;
 }
 
 export function factory(wish:Values):Model {
+    console.log(wish);
     assertIsDefined(wish.title);
 
     const now = new Date().toISOString();

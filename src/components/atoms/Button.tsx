@@ -20,6 +20,7 @@ export default function Button(props:Props){
     return(
         <UiKittenButton
             style={style}
+            onPress={onPress}
         >
             {label}
         </UiKittenButton>

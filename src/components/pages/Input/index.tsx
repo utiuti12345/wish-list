@@ -3,6 +3,8 @@ import {Image, SafeAreaView, StyleSheet, Text} from "react-native";
 import {Button,TextField} from "../../atoms";
 import {fetchImageUrl} from "../../../lib/amazon";
 import {useNavigation} from "@react-navigation/native";
+import registerUser from "../../../lib/firebase/register-user";
+import {addAndSync} from "../../../usecases/wish";
 
 const styles = StyleSheet.create({
     image:{
@@ -37,8 +39,14 @@ export default function Input() {
         setImageUrl(imageUrl);
     },[setUrl]);
 
-    const onSubmit = React.useCallback(() => {
+    const onSubmit = React.useCallback(async () => {
         console.log("aaa");
+        // addAndSync("4DG0xhyz3ihmbFEAyklcyEvE9vJ3",{
+        //     title:"トレーニングウエアソックス12344",
+        //     imageUrl:"https://images-na.ssl-images-amazon.com/images/P/B01BM6FQQS.09.MZZZZZZZ",
+        //     detail:"aaaa",
+        //     price:"1200",
+        // });
         goBack();
     },[goBack]);
 
