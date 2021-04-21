@@ -3,8 +3,7 @@ import {Image, SafeAreaView, StyleSheet, Text} from "react-native";
 import {Button,TextField} from "../../atoms";
 import {fetchImageUrl} from "../../../lib/amazon";
 import {useNavigation} from "@react-navigation/native";
-import registerUser from "../../../lib/firebase/register-user";
-import {addAndSync} from "../../../usecases/wish";
+import {Wish} from "../../../domain/models";
 
 const styles = StyleSheet.create({
     image:{
@@ -18,7 +17,13 @@ const styles = StyleSheet.create({
     }
 });
 
-export default function Input() {
+interface Props {
+    actions: {
+        addWish: (newValues: Wish.Values) => void;
+    };
+}
+
+export default function Input(props:Props) {
     const {goBack} = useNavigation();
 
     const [titleValue,setTitle] = useState("");
@@ -40,14 +45,18 @@ export default function Input() {
     },[setUrl]);
 
     const onSubmit = React.useCallback(async () => {
-        console.log("aaa");
-        // addAndSync("4DG0xhyz3ihmbFEAyklcyEvE9vJ3",{
-        //     title:"トレーニングウエアソックス12344",
-        //     imageUrl:"https://images-na.ssl-images-amazon.com/images/P/B01BM6FQQS.09.MZZZZZZZ",
-        //     detail:"aaaa",
-        //     price:"1200",
-        // });
+        props.actions.addWish({
+            title:titleValue,
+            price:priceValue,
+            url:urlValue,
+            imageUrl:imageUrlValue,
+            detail:"",
+        })
+
         goBack();
+        onChangeTitle("");
+        onChangePrice("");
+        onChangeUrl("");
     },[goBack]);
 
     return (

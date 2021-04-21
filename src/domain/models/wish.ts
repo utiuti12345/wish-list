@@ -4,6 +4,7 @@ import {assertIsDefined} from "../../lib/assert";
 export interface Model {
     readonly id:string;
     readonly title: string;
+    readonly url?:string;
     readonly imageUrl?:string;
     readonly detail?: string;
     readonly price?: string;
@@ -13,6 +14,7 @@ export interface Model {
 
 export interface Values {
     readonly title:string;
+    readonly url?:string;
     readonly imageUrl?:string;
     readonly detail?: string;
     readonly price?: string;
@@ -27,6 +29,7 @@ export function factory(wish:Values):Model {
     return{
         id:generatedUuid(),
         title:wish.title,
+        url:wish.url,
         imageUrl:wish.imageUrl,
         detail:wish.detail,
         price:wish.price,
