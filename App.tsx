@@ -10,12 +10,15 @@ import {
 } from '@ui-kitten/components';
 import {EvaIconsPack} from '@ui-kitten/eva-icons';
 import {SafeAreaProvider} from "react-native-safe-area-context";
+import {Provider} from "react-redux";
+import store from "./src/store";
 
 export default function App() {
   const [applicationState,setApplicationState] = React.useState(UiContext.createApplicationState());
   const [userState,setUserState] = React.useState(UserContext.createInitialState());
   return (
       <>
+          <Provider store={store}>
           <IconRegistry icons={EvaIconsPack} />
           <ApplicationProvider {...eva} theme={eva.light}>
               <SafeAreaProvider>
@@ -26,6 +29,7 @@ export default function App() {
                   </UiContext.Context.Provider>
               </SafeAreaProvider>
           </ApplicationProvider>
+          </Provider>
       </>
   );
 }

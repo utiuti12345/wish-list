@@ -4,6 +4,7 @@ import {Button,TextField} from "../../atoms";
 import {fetchImageUrl} from "../../../lib/amazon";
 import {useNavigation} from "@react-navigation/native";
 import {Wish} from "../../../domain/models";
+import useControlledComponent from "../../../lib/hooks/use-controlled-component";
 
 const styles = StyleSheet.create({
     image:{
@@ -26,45 +27,38 @@ interface Props {
 export default function Input(props:Props) {
     const {goBack} = useNavigation();
 
-    const [titleValue,setTitle] = useState("");
-    const onChangeTitle = useCallback((newValue) => {
-        setTitle(newValue);
-    },[setTitle]);
+    const title = useControlledComponent('');
+    const price = useControlledComponent('');
+    const url = useControlledComponent('');
+    const imageUrl = useControlledComponent('');
 
-    const [priceValue,setPrice] = useState("");
-    const onChangePrice = useCallback((newValue) => {
-        setPrice(newValue);
-    },[setPrice]);
+    const onChangeUrl = React.useCallback((newValue) => {
+        url.onChangeText(newValue);
 
-    const [urlValue,setUrl] = useState("");
-    const [imageUrlValue,setImageUrl] = useState("");
-    const onChangeUrl = useCallback((newValue) => {
-        setUrl(newValue);
-        const imageUrl = fetchImageUrl(newValue);
-        setImageUrl(imageUrl);
-    },[setUrl]);
+        const image = fetchImageUrl(newValue);
+        imageUrl.onChangeText(image);
+    },[]);
 
     const onSubmit = React.useCallback(async () => {
         props.actions.addWish({
-            title:titleValue,
-            price:priceValue,
-            url:urlValue,
-            imageUrl:imageUrlValue,
+            title:title.value,
+            price:price.value,
+            url:url.value,
+            imageUrl:imageUrl.value,
             detail:"",
-        })
+        });
 
         goBack();
-        onChangeTitle("");
-        onChangePrice("");
-        onChangeUrl("");
-    },[goBack]);
+        title.onChangeText("");
+        price.onChangeText("");
+    },[goBack,title,price,url,imageUrl]);
 
     return (
         <SafeAreaView>
-            <TextField label="text" value={titleValue} onChangeText={onChangeTitle} secureTextEntry={false}/>
-            <TextField label="price" value={priceValue} onChangeText={onChangePrice} secureTextEntry={false} keyboardType="numeric"/>
-            <TextField label="url" value={urlValue} onChangeText={onChangeUrl} secureTextEntry={false}/>
-            <Image source={{ uri: imageUrlValue }}
+            <TextField label="text" value={title.value} onChangeText={title.onChangeText} secureTextEntry={false}/>
+            <TextField label="price" value={price.value} onChangeText={price.onChangeText} secureTextEntry={false} keyboardType="numeric"/>
+            <TextField label="url" value={url.value} onChangeText={onChangeUrl} secureTextEntry={false}/>
+            <Image source={{ uri: imageUrl.value }}
                    style={styles.image}
             />
             <Button label="sample" onPress={onSubmit}/>
