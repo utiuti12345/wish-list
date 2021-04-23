@@ -8,7 +8,8 @@ export function getAll(userId:string){
             const wishList = querySnapshot.docs.reduce((result:WishList.Model,doc) =>{
                 result[doc.id] = doc.data() as Wish.Model;
                 return result
-            },{})
+            },{});
+            return wishList;
         })
 }
 

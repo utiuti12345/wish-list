@@ -2,9 +2,9 @@ import React from "react";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import {createStackNavigator,StackCardInterpolationProps} from "@react-navigation/stack";
 import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
-import {HOME, INPUT, LOADING, USER_INFO} from "../../constants/path";
-import {Loading,UserInfo} from "../../components/pages";
-import {Input} from "../../containers";
+import {HOME, INPUT, LOADING, SIGN_IN, USER_INFO} from "../../constants/path";
+import {Loading, UserInfo} from "../../components/pages";
+import {Input,SignIn} from "../../containers";
 import * as UiContext from "../../contexts/ui";
 import Home from "./Home";
 import Icon from "../../components/atoms/Icon";
@@ -73,9 +73,9 @@ function switchingAuthStatus(status:UiContext.Status) {
         case UiContext.Status.FIRST_OPEN:
             return <Stack.Screen name={HOME} component={Loading}/>;
         case UiContext.Status.LOADING:
-            return <Stack.Screen name={HOME} component={Loading}/>;
+            return <Stack.Screen name={LOADING} component={Loading}/>;
         case UiContext.Status.UN_AUTHORIZED:
-            return <Stack.Screen name={HOME} component={Loading}/>;
+            return <Stack.Screen name={SIGN_IN} component={SignIn}/>;
     }
 }
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { Button as UiKittenButton } from '@ui-kitten/components';
-import {StyleSheet, ViewStyle} from "react-native";
+import {Keyboard, StyleSheet, ViewStyle} from "react-native";
 
 const styles = StyleSheet.create({
     button: {
@@ -25,4 +25,8 @@ export default function Button(props:Props){
             {label}
         </UiKittenButton>
     )
+}
+
+export function dismiss() {
+    Keyboard.dismiss();
 }
