@@ -4,8 +4,10 @@ import {FlatList} from "react-native";
 
 import {State} from '../molecules/Wish';
 
+export type ArrayState = Array<State>;
+
 interface Props {
-    wishList:Array<State>
+    wishList:ArrayState;
 }
 
 export default function WishList(props:Props) {

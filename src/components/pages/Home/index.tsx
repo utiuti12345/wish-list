@@ -6,6 +6,7 @@ import {Avatar} from "../../atoms";
 import {WishList} from "../../organisms";
 import {INPUT} from "../../../constants/path";
 import {IconButton} from "../../molecules";
+import {ArrayState} from "../../organisms/WishList";
 
 const styles = StyleSheet.create({
     container: {
@@ -37,7 +38,7 @@ const styles = StyleSheet.create({
 const avatar = require('../../../../assets/person.png');
 
 export interface Props {
-    wishList:[];
+    wishList:ArrayState;
 }
 
 const data:Array<State> = [
@@ -54,8 +55,8 @@ const data:Array<State> = [
     // },
 ]
 
-export default function Home() {
-    //const {wishList} = props;
+export default function Home(props:Props) {
+    const {wishList} = props;
 
     const {navigate} = useNavigation();
     const onPress = React.useCallback(() => {
@@ -72,7 +73,7 @@ export default function Home() {
             </View>
             <IconButton name="plus-circle" fill="#8F9BB3" style={styles.icon} onPress={onPress}/>
             <ScrollView style={{flex:1}}>
-                <WishList wishList={data}/>
+                <WishList wishList={wishList}/>
             </ScrollView>
         </SafeAreaView>
     )
