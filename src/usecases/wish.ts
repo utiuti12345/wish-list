@@ -11,5 +11,5 @@ export function addAndSync(userId:string,newValues:Wish.Values){
         const newWish = Wish.factory(newValues);
         dispatch(add(newWish));
         WishRepository.add(userId,newWish);
-    }
+    };
 }

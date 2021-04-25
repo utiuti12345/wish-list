@@ -17,8 +17,7 @@ export default function App() {
   const [applicationState,setApplicationState] = React.useState(UiContext.createApplicationState());
   const [userState,setUserState] = React.useState(UserContext.createInitialState());
   return (
-      <>
-          <Provider store={store}>
+      <Provider store={store}>
           <IconRegistry icons={EvaIconsPack} />
           <ApplicationProvider {...eva} theme={eva.light}>
               <SafeAreaProvider>
@@ -29,8 +28,7 @@ export default function App() {
                   </UiContext.Context.Provider>
               </SafeAreaProvider>
           </ApplicationProvider>
-          </Provider>
-      </>
+      </Provider>
   );
 }
 

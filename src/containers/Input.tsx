@@ -10,18 +10,13 @@ export default function ConnectedInput(){
 
     const dispatch = useDispatch();
     const actions = React.useMemo(() =>{
-        return {
-            addWish(newValues:Wish.Values){
-                WishList.addAndSync("4DG0xhyz3ihmbFEAyklcyEvE9vJ3",newValues);
+        if (userState){
+            return {
+                addWish(newValues:Wish.Values){
+                    WishList.addAndSync(userState.id,newValues);
+                }
             }
         }
-        // if (userState){
-        //     return {
-        //         addWish(newValues:Wish.Values){
-        //             WishList.addAndSync(userState.id,newValues);
-        //         }
-        //     }
-        // }
     },[userState,dispatch]);
 
     if(!actions){
