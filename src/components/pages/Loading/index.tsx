@@ -31,6 +31,7 @@ function useUserInformation(setWishList:SetWishList){
                     .then(wishList => {
                         console.log(wishList);
                         setWishList(wishList);
+                        setApplicationState(Status.AUTHORIZED)
                         return;
                     })
                     .catch(e => {

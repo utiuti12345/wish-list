@@ -8,7 +8,7 @@ export enum Status {
 }
 
 export function createApplicationState():Status {
-    return Status.UN_AUTHORIZED;
+    return Status.LOADING;
 }
 
 export const Context = React.createContext({

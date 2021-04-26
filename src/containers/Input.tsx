@@ -13,7 +13,7 @@ export default function ConnectedInput(){
         if (userState){
             return {
                 addWish(newValues:Wish.Values){
-                    WishList.addAndSync(userState.id,newValues);
+                    dispatch(WishList.addAndSync(userState.id,newValues));
                 }
             }
         }
