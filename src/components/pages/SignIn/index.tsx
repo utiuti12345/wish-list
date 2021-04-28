@@ -11,24 +11,14 @@ import {Button, TextField,dismiss} from "../../atoms";
 import {Status} from "../../../contexts/ui";
 
 const styles = StyleSheet.create({
-    container:{
-        flex:1,
-        padding:16,
-        justifyContent:'center',
+    container: {
+        flex: 1,
+        paddingVertical: 24,
+        paddingHorizontal: 16,
     },
-    text:{
-        marginVertical:20,
-    },
-    button:{
-        marginTop:50,
-    },
-    textContainer:{
-        flex:1,
-        justifyContent: 'center',
-    },
-    buttonContainer:{
-        flex:1,
-        justifyContent:'flex-start',
+    formContainer:{
+        flex: 1,
+        marginTop: 48,
     },
 });
 
@@ -59,33 +49,26 @@ export default function SignIn(props:Props) {
     },[mailAddress.value,password.value,setUserState,setWishList]);
 
     return (
-        <TouchableWithoutFeedback onPress={dismiss}>
-            <SafeAreaView style={styles.container}>
-                <View style={styles.textContainer}>
-                    <TextField
-                        label="email"
-                        value={mailAddress.value}
-                        onChangeText={mailAddress.onChangeText}
-                        style={styles.text}
-                        autoCompleteType="email"
-                    />
-                    <TextField
-                        label="password"
-                        value={password.value}
-                        onChangeText={password.onChangeText}
-                        style={styles.text}
-                        autoCompleteType="password"
-                        secureTextEntry={true}
-                    />
-                </View>
-                <View style={styles.buttonContainer}>
-                    <Button
-                        onPress={signInWithPassword}
-                        style={styles.button}
-                        label="SignIn"
-                    />
-                </View>
-            </SafeAreaView>
-        </TouchableWithoutFeedback>
+        <SafeAreaView style={styles.container}>
+            <View style={styles.formContainer}>
+                <TextField
+                    label="email"
+                    value={mailAddress.value}
+                    onChangeText={mailAddress.onChangeText}
+                    autoCompleteType="email"
+                />
+                <TextField
+                    label="password"
+                    value={password.value}
+                    onChangeText={password.onChangeText}
+                    autoCompleteType="password"
+                    secureTextEntry={true}
+                />
+                <Button
+                    onPress={signInWithPassword}
+                    label="SignIn"
+                />
+            </View>
+        </SafeAreaView>
     );
 }
