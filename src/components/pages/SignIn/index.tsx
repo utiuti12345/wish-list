@@ -37,9 +37,7 @@ export default function SignIn(props:Props) {
     const password = useControlledComponent('');
 
     const signInWithPassword = React.useCallback(async () => {
-        console.log(mailAddress.value);
         const userInformation = await signInWithPasswordToFirebase(mailAddress.value,password.value);
-        console.log(userInformation);
         setUserState(userInformation);
         await LocalStore.UserInformation.save(userInformation);
 
