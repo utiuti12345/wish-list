@@ -1,6 +1,6 @@
 import React from "react";
 import {SafeAreaView, StyleSheet, Text} from "react-native";
-import {Button} from "../../atoms";
+import {Avatar, Button} from "../../atoms";
 import {UiContext, UserContext} from "../../../contexts";
 import {Status} from "../../../contexts/ui";
 import * as LocalStore from "../../../lib/local-store";
@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
 });
 
 export default function UserInfo() {
-    const {setUserState} = React.useContext(UserContext);
+    const {userState,setUserState} = React.useContext(UserContext);
     const {setApplicationState} = React.useContext(UiContext);
 
     const SignOut = React.useCallback(async () => {
@@ -24,12 +24,21 @@ export default function UserInfo() {
         setUserState(null);
         await LocalStore.UserInformation.clear();
         setApplicationState(Status.UN_AUTHORIZED);
-        console.log("aaaaaa");
     },[]);
+
+    if (!userState){
+        return null;
+    }
+
+    const {name,mailAddress,photoUrl} = userState;
+
+    const source = photoUrl == null ? require("../../../../assets/person.png") : photoUrl
 
     return (
         <SafeAreaView style={styles.container}>
-            <Text>UserInfo</Text>
+            <Text>{name}</Text>
+            <Text>{mailAddress}</Text>
+            <Avatar source={source}/>
             <Button onPress={SignOut} label="SignOut"/>
         </SafeAreaView>
         );
