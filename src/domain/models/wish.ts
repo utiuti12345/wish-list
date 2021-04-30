@@ -38,7 +38,7 @@ export function factory(wish:Values):Model {
     }
 }
 
-export function change(wish:Model,newValue:Values):Model {
+export function update(wish:Model,newValue:Values):Model {
     assertIsDefined(newValue.title);
 
     const now = new Date().toISOString();

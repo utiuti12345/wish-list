@@ -61,7 +61,7 @@ export default function Input(props:Props) {
             <Image source={{ uri: imageUrl.value }}
                    style={styles.image}
             />
-            <Button label="sample" onPress={onSubmit}/>
+            <Button label="登録" onPress={onSubmit}/>
         </SafeAreaView>
     )
 }

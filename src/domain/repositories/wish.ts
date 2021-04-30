@@ -21,3 +21,12 @@ export function add(userId:string,newWish:Wish.Model) {
             throw e;
         });
 }
+
+export function update(userId:string,id:string, newWish:Wish.Values){
+    firestore(userId)
+        .doc(id)
+        .update(newWish)
+        .catch(e => {
+           throw e;
+        });
+}

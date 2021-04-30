@@ -22,3 +22,10 @@ export function add(wishList:Model,newWish:Wish.Model):Model{
         [newWish.id]:newWish,
     }
 }
+
+export function update(wishList:Model,id:string,newValue:Wish.Values){
+    return {
+        ...wishList,
+        [id]:Wish.update(wishList[id],newValue)
+    }
+}
