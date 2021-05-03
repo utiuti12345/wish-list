@@ -4,7 +4,7 @@ import {State} from "../../molecules/Wish";
 import {useNavigation} from "@react-navigation/native";
 import {Avatar} from "../../atoms";
 import {WishList} from "../../organisms";
-import {INPUT} from "../../../constants/path";
+import {DETAIL, INPUT} from "../../../constants/path";
 import {IconButton} from "../../molecules";
 import {ArrayState} from "../../organisms/WishList";
 
@@ -41,26 +41,15 @@ export interface Props {
     wishList:ArrayState;
 }
 
-const data:Array<State> = [
-    {
-        id:"12345",
-        title:"トレーニングウエア ソックス",
-        imageUrl:"https://images-na.ssl-images-amazon.com/images/P/B01BM6FQQS.09.MZZZZZZZ",
-        price:"1000",
-    },
-    // {
-    //     id:"12345",
-    //     title:"トレーニングウエア ソックス",
-    //     imageUrl:"https://images-na.ssl-images-amazon.com/images/P/B01BM6FQQS.09.MZZZZZZZ",
-    // },
-]
-
 export default function Home(props:Props) {
     const {wishList} = props;
 
     const {navigate} = useNavigation();
     const onPress = React.useCallback(() => {
         navigate(INPUT)
+    },[navigate]);
+    const gotoDetail = React.useCallback((state:State) => {
+        navigate(DETAIL,state);
     },[navigate]);
 
     return(
@@ -73,7 +62,7 @@ export default function Home(props:Props) {
             </View>
             <IconButton name="plus-circle" fill="#8F9BB3" style={styles.icon} onPress={onPress}/>
             <ScrollView style={{flex:1}}>
-                <WishList wishList={wishList}/>
+                <WishList wishList={wishList} gotoDetail={gotoDetail}/>
             </ScrollView>
         </SafeAreaView>
     )

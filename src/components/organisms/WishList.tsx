@@ -1,22 +1,22 @@
 import React from "react";
 import {Wish} from "../molecules";
 import {FlatList} from "react-native";
-
-import {State} from '../molecules/Wish';
+import {GotoDetail, State} from '../molecules/Wish';
 
 export type ArrayState = Array<State>;
 
 interface Props {
     wishList:ArrayState;
+    gotoDetail:GotoDetail;
 }
 
 export default function WishList(props:Props) {
-    const {wishList} = props;
+    const {wishList,gotoDetail} = props;
     return(
         <FlatList
             data={wishList}
             numColumns={2}
-            renderItem={ ({ item, index }) => (<Wish wish={item}/>
+            renderItem={ ({ item, index }) => (<Wish wish={item} gotoDetail={gotoDetail}/>
             )}
         />
     )

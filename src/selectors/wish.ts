@@ -11,6 +11,7 @@ export const getArray = createSelector([selectWishList],wishList =>
     Object.values(wishList).map(wish =>({
         id:wish.id,
         title:wish.title,
+        url:wish.url,
         imageUrl:wish.imageUrl,
         detail:wish.detail,
         price:wish.price,

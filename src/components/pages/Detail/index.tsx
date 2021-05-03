@@ -62,7 +62,7 @@ export default function Detail(props:Props) {
         });
 
         goBack();
-    },[title,price,url,imageUrl]);
+    },[title.value,price.value,url.value,imageUrl.value,goBack]);
 
     return (
         <SafeAreaView>

@@ -22,17 +22,22 @@ export interface State {
     price?:string;
 }
 
+export interface GotoDetail{
+    (state:State):void;
+}
+
 interface Props {
-    wish:State
+    wish:State;
+    gotoDetail:GotoDetail;
 }
 
 export default function Wish(props:Props) {
-    const {wish} = props;
+    const {wish,gotoDetail} = props;
     const {navigate} = useNavigation();
 
     const onPress = React.useCallback(() => {
-        navigate(DETAIL,wish)
-    },[navigate]);
+        gotoDetail(wish);
+    },[wish,gotoDetail]);
 
     return(
         <TouchableOpacity onPress={onPress}>
