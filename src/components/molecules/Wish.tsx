@@ -1,7 +1,5 @@
 import React from "react";
 import {Image, StyleSheet,TouchableOpacity} from "react-native";
-import {useNavigation} from "@react-navigation/native";
-import {DETAIL} from "../../constants/path";
 
 const styles = StyleSheet.create({
     image:{
@@ -33,7 +31,6 @@ interface Props {
 
 export default function Wish(props:Props) {
     const {wish,gotoDetail} = props;
-    const {navigate} = useNavigation();
 
     const onPress = React.useCallback(() => {
         gotoDetail(wish);

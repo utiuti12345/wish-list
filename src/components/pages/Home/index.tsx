@@ -7,6 +7,7 @@ import {WishList} from "../../organisms";
 import {DETAIL, INPUT} from "../../../constants/path";
 import {IconButton} from "../../molecules";
 import {ArrayState} from "../../organisms/WishList";
+import {UserContext} from "../../../contexts";
 
 const styles = StyleSheet.create({
     container: {
@@ -42,6 +43,7 @@ export interface Props {
 }
 
 export default function Home(props:Props) {
+    const {userState} = React.useContext(UserContext);
     const {wishList} = props;
 
     const {navigate} = useNavigation();
@@ -52,10 +54,16 @@ export default function Home(props:Props) {
         navigate(DETAIL,state);
     },[navigate]);
 
+    if(!userState){
+        return null;
+    }
+
+    const source = userState.photoUrl == null ? require("../../../../assets/person.png") : userState.photoUrl;
+
     return(
         <SafeAreaView style={styles.container}>
             <View style={styles.imageIconContainer}>
-                <Avatar source={avatar}/>
+                <Avatar source={source}/>
                 <View style={styles.nameContainer}>
                     <Text style={styles.nameText}>sample</Text>
                 </View>
