@@ -36,7 +36,7 @@ export default function SignIn(props:Props) {
     const mailAddress = useControlledComponent('');
     const password = useControlledComponent('');
 
-    const signInWithPassword = React.useCallback(async () => {
+    const signInWithPassword = async () => {
         const userInformation = await signInWithPasswordToFirebase(mailAddress.value,password.value);
         setUserState(userInformation);
         await LocalStore.UserInformation.save(userInformation);
@@ -44,7 +44,7 @@ export default function SignIn(props:Props) {
         const wishList = await WishRepository.getAll(userInformation.id);
         setWishList(wishList);
         setApplicationState(Status.AUTHORIZED);
-    },[mailAddress.value,password.value,setUserState,setWishList]);
+    };
 
     return (
         <SafeAreaView style={styles.container}>
