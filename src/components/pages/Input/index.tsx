@@ -1,12 +1,17 @@
 import React, {useCallback, useState} from "react";
 import {Image, SafeAreaView, StyleSheet, Text} from "react-native";
-import {Button,TextField} from "../../atoms";
+import {Button, dismiss, TextField} from "../../atoms";
 import {fetchImageUrl} from "../../../lib/amazon";
 import {useNavigation} from "@react-navigation/native";
 import {Wish} from "../../../domain/models";
 import useControlledComponent from "../../../lib/hooks/use-controlled-component";
+import {TouchableWithoutFeedback} from "@ui-kitten/components/devsupport";
+import {COLOR} from "../../../constants/theme";
 
 const styles = StyleSheet.create({
+    container:{
+        backgroundColor:COLOR.BLACK,
+    },
     image:{
         width:300,
         height:300,
@@ -54,14 +59,16 @@ export default function Input(props:Props) {
     },[goBack,title,price,url,imageUrl]);
 
     return (
-        <SafeAreaView>
-            <TextField label="text" value={title.value} onChangeText={title.onChangeText} secureTextEntry={false}/>
-            <TextField label="price" value={price.value} onChangeText={price.onChangeText} secureTextEntry={false} keyboardType="numeric"/>
-            <TextField label="url" value={url.value} onChangeText={onChangeUrl} secureTextEntry={false}/>
-            <Image source={{ uri: imageUrl.value }}
-                   style={styles.image}
-            />
-            <Button label="登録" onPress={onSubmit}/>
-        </SafeAreaView>
+        <TouchableWithoutFeedback onPress={dismiss} style={styles.container}>
+            <SafeAreaView>
+                <TextField label="text" value={title.value} onChangeText={title.onChangeText} secureTextEntry={false}/>
+                <TextField label="price" value={price.value} onChangeText={price.onChangeText} secureTextEntry={false} keyboardType="numeric"/>
+                <TextField label="url" value={url.value} onChangeText={onChangeUrl} secureTextEntry={false}/>
+                <Image source={{ uri: imageUrl.value }}
+                       style={styles.image}
+                />
+                <Button label="登録" onPress={onSubmit}/>
+            </SafeAreaView>
+        </TouchableWithoutFeedback>
     )
 }

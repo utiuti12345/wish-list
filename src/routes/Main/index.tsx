@@ -44,7 +44,7 @@ function TabRoutes() {
             <Tab.Screen name={HOME} component={Home} options={{
                 tabBarLabel: 'Home',
                 tabBarIcon: () => (
-                    <Icon name="person" fill="#8F9BB3" style={styles.icon}/>
+                    <Icon name="gift-outline" fill="#8F9BB3" style={styles.icon}/>
                 ),
             }}/>
             <Tab.Screen name={USER_INFO} component={UserInfo} options={{

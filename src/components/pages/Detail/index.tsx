@@ -3,11 +3,16 @@ import {Image, SafeAreaView, StyleSheet, Text, TextInput} from "react-native";
 import {RouteProp, useNavigation, useRoute} from "@react-navigation/native";
 import {fetchImageUrl} from "../../../lib/amazon";
 import TextField from "../../atoms/TextField";
-import {Button} from "../../atoms";
+import {Button, dismiss} from "../../atoms";
 import useControlledComponent from "../../../lib/hooks/use-controlled-component";
 import {Wish} from "../../../domain/models";
+import {TouchableWithoutFeedback} from "@ui-kitten/components/devsupport";
+import {COLOR} from "../../../constants/theme";
 
 const styles = StyleSheet.create({
+    container:{
+        backgroundColor:COLOR.BLACK,
+    },
     image:{
         width:300,
         height:300,
@@ -65,15 +70,17 @@ export default function Detail(props:Props) {
     },[title.value,price.value,url.value,imageUrl.value,goBack]);
 
     return (
-        <SafeAreaView>
-            <TextField label="text" value={title.value} onChangeText={title.onChangeText} secureTextEntry={false}/>
-            <TextField label="price" value={price.value} onChangeText={price.onChangeText} secureTextEntry={false} keyboardType="numeric"/>
-            <TextField label="url" value={url.value} onChangeText={onChangeUrl} secureTextEntry={false}/>
-            <Image source={{ uri: imageUrl.value }}
-                   key={id}
-                   style={styles.image}
-            />
-            <Button label="更新" onPress={onSubmit}/>
-        </SafeAreaView>
+        <TouchableWithoutFeedback onPress={dismiss} style={styles.container}>
+            <SafeAreaView>
+                <TextField label="text" value={title.value} onChangeText={title.onChangeText} secureTextEntry={false}/>
+                <TextField label="price" value={price.value} onChangeText={price.onChangeText} secureTextEntry={false} keyboardType="numeric"/>
+                <TextField label="url" value={url.value} onChangeText={onChangeUrl} secureTextEntry={false}/>
+                <Image source={{ uri: imageUrl.value }}
+                       key={id}
+                       style={styles.image}
+                />
+                <Button label="更新" onPress={onSubmit}/>
+            </SafeAreaView>
+        </TouchableWithoutFeedback>
     )
 }
