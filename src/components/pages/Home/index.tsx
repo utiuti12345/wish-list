@@ -8,11 +8,12 @@ import {DETAIL, INPUT} from "../../../constants/path";
 import {IconButton} from "../../molecules";
 import {ArrayState} from "../../organisms/WishList";
 import {UserContext} from "../../../contexts";
+import {COLOR} from "../../../constants/theme";
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: COLOR.BLACK,
         alignItems: 'center',
         justifyContent: 'center',
     },
