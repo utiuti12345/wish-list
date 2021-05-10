@@ -15,7 +15,7 @@ const MyTheme = {
 
 export default function LoggingRoutes() {
     return (
-        <NavigationContainer theme={MyTheme}>
+        <NavigationContainer>
             <MainRoutes/>
         </NavigationContainer>
     )

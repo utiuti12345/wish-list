@@ -10,7 +10,10 @@ import {COLOR} from "../../../constants/theme";
 
 const styles = StyleSheet.create({
     container:{
-        backgroundColor:COLOR.BLACK,
+        backgroundColor:COLOR.WHITE,
+    },
+    text:{
+        borderRadius: 25,
     },
     image:{
         width:300,
@@ -61,9 +64,9 @@ export default function Input(props:Props) {
     return (
         <TouchableWithoutFeedback onPress={dismiss} style={styles.container}>
             <SafeAreaView>
-                <TextField label="text" value={title.value} onChangeText={title.onChangeText} secureTextEntry={false}/>
-                <TextField label="price" value={price.value} onChangeText={price.onChangeText} secureTextEntry={false} keyboardType="numeric"/>
-                <TextField label="url" value={url.value} onChangeText={onChangeUrl} secureTextEntry={false}/>
+                <TextField value={title.value} onChangeText={title.onChangeText} secureTextEntry={false} style={styles.text}/>
+                <TextField value={price.value} onChangeText={price.onChangeText} secureTextEntry={false} keyboardType="numeric" style={styles.text}/>
+                <TextField value={url.value} onChangeText={onChangeUrl} secureTextEntry={false} style={styles.text}/>
                 <Image source={{ uri: imageUrl.value }}
                        style={styles.image}
                 />

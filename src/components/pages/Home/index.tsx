@@ -13,7 +13,7 @@ import {COLOR} from "../../../constants/theme";
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: COLOR.BLACK,
+        backgroundColor: COLOR.WHITE,
         alignItems: 'center',
         justifyContent: 'center',
     },

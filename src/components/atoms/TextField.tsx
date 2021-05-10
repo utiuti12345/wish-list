@@ -3,8 +3,9 @@ import { Input } from '@ui-kitten/components';
 import {ViewStyle} from "react-native";
 
 interface Props{
-    label:string;
+    label?:string;
     value:string;
+    placeholder?:string;
     onChangeText?:(str:string) => void;
     style?:ViewStyle;
     secureTextEntry?: boolean;
@@ -31,13 +32,14 @@ interface Props{
 }
 
 export default function TextField(props:Props){
-    const {label,value,onChangeText = () => {},style,secureTextEntry,autoCompleteType,keyboardType} = props;
+    const {label,value,placeholder,onChangeText = () => {},style,secureTextEntry,autoCompleteType,keyboardType} = props;
 
     return(
         <Input
             style={style}
             label={label}
             value={value}
+            placeholder={placeholder}
             onChangeText={onChangeText}
             secureTextEntry={secureTextEntry}
             autoCompleteType={autoCompleteType}

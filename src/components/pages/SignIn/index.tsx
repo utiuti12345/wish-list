@@ -16,7 +16,10 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingVertical: 24,
         paddingHorizontal: 16,
-        backgroundColor:COLOR.BLACK,
+        backgroundColor:COLOR.WHITE,
+    },
+    text:{
+        borderRadius: 25,
     },
     formContainer:{
         flex: 1,
@@ -53,17 +56,19 @@ export default function SignIn(props:Props) {
             <View style={styles.container}>
                 <View style={styles.formContainer}>
                     <TextField
-                        label="email"
                         value={mailAddress.value}
+                        placeholder="email"
                         onChangeText={mailAddress.onChangeText}
                         autoCompleteType="email"
+                        style={styles.text}
                     />
                     <TextField
-                        label="password"
                         value={password.value}
+                        placeholder="password"
                         onChangeText={password.onChangeText}
                         autoCompleteType="password"
                         secureTextEntry={true}
+                        style={styles.text}
                     />
                     <Button
                         onPress={signInWithPassword}
