@@ -7,7 +7,7 @@ import * as LocalStore from "../../../lib/local-store/index";
 import useControlledComponent from "../../../lib/hooks/use-controlled-component";
 import {WishList} from "../../../domain/models";
 import {TouchableWithoutFeedback} from "@ui-kitten/components/devsupport";
-import {Button, TextField,dismiss} from "../../atoms";
+import {Button, TextField, dismiss} from "../../atoms";
 import {Status} from "../../../contexts/ui";
 import {COLOR} from "../../../constants/theme";
 
@@ -16,24 +16,27 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingVertical: 24,
         paddingHorizontal: 16,
-        backgroundColor:COLOR.WHITE,
+        backgroundColor: COLOR.WHITE,
     },
-    text:{
+    text: {
         borderRadius: 25,
     },
-    formContainer:{
+    formContainer: {
         flex: 1,
-        marginTop: 48,
+        marginTop: 200,
     },
+    buttonContainer:{
+        flex:1,
+    }
 });
 
-interface Props{
-    actions:{
-        setWishList:(wishList:WishList.Model) => void;
+interface Props {
+    actions: {
+        setWishList: (wishList: WishList.Model) => void;
     }
 }
 
-export default function SignIn(props:Props) {
+export default function SignIn(props: Props) {
     const {setUserState} = React.useContext(UserContext);
     const {setApplicationState} = React.useContext(UiContext);
     const {setWishList} = props.actions;
@@ -42,7 +45,7 @@ export default function SignIn(props:Props) {
     const password = useControlledComponent('');
 
     const signInWithPassword = async () => {
-        const userInformation = await signInWithPasswordToFirebase(mailAddress.value,password.value);
+        const userInformation = await signInWithPasswordToFirebase(mailAddress.value, password.value);
         setUserState(userInformation);
         await LocalStore.UserInformation.save(userInformation);
 
@@ -70,6 +73,8 @@ export default function SignIn(props:Props) {
                         secureTextEntry={true}
                         style={styles.text}
                     />
+                </View>
+                <View style={styles.buttonContainer}>
                     <Button
                         onPress={signInWithPassword}
                         label="SignIn"
