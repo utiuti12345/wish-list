@@ -11,7 +11,10 @@ import {COLOR} from "../../../constants/theme";
 
 const styles = StyleSheet.create({
     container:{
-        backgroundColor:COLOR.MAIN,
+        flex: 1,
+        paddingVertical: 24,
+        paddingHorizontal: 16,
+        backgroundColor: COLOR.WHITE,
     },
     text:{
         borderRadius: 25,

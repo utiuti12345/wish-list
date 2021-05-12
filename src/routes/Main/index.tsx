@@ -9,6 +9,7 @@ import * as UiContext from "../../contexts/ui";
 import Home from "./Home";
 import Icon from "../../components/atoms/Icon";
 import {StyleSheet} from "react-native";
+import {COLOR} from "../../constants/theme";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -27,7 +28,8 @@ const styles = StyleSheet.create({
 });
 
 const cardStyle = {
-    backgroundColor: "white",
+    backgroundColor: COLOR.WHITE,
+    headerShown: true,
 };
 
 function TabRoutes() {

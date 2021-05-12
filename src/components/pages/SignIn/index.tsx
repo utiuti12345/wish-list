@@ -18,12 +18,12 @@ const styles = StyleSheet.create({
         paddingHorizontal: 16,
         backgroundColor: COLOR.WHITE,
     },
-    text: {
-        borderRadius: 25,
-    },
     formContainer: {
         flex: 1,
         marginTop: 200,
+    },
+    text: {
+        borderRadius: 25,
     },
     buttonContainer:{
         flex:1,
