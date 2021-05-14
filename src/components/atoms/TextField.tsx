@@ -6,8 +6,10 @@ interface Props{
     label?:string;
     value:string;
     placeholder?:string;
+    multiline?:boolean;
     onChangeText?:(str:string) => void;
     style?:ViewStyle;
+    textStyle?:ViewStyle;
     secureTextEntry?: boolean;
     autoCompleteType?:
         | 'off'
@@ -32,14 +34,16 @@ interface Props{
 }
 
 export default function TextField(props:Props){
-    const {label,value,placeholder,onChangeText = () => {},style,secureTextEntry,autoCompleteType,keyboardType} = props;
+    const {label,value,placeholder,multiline,onChangeText = () => {},style,textStyle,secureTextEntry,autoCompleteType,keyboardType} = props;
 
     return(
         <Input
             style={style}
+            textStyle={textStyle}
             label={label}
             value={value}
             placeholder={placeholder}
+            multiline={multiline}
             onChangeText={onChangeText}
             secureTextEntry={secureTextEntry}
             autoCompleteType={autoCompleteType}

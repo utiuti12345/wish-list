@@ -1,5 +1,5 @@
-import React, {useCallback, useContext, useState} from "react";
-import {Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View} from "react-native";
+import React, {useContext} from "react";
+import {Image, SafeAreaView, StyleSheet, TouchableOpacity, View} from "react-native";
 import {Avatar, Button, dismiss, TextField} from "../../atoms";
 import {fetchImageUrl} from "../../../lib/amazon";
 import {useNavigation} from "@react-navigation/native";
@@ -48,6 +48,9 @@ const styles = StyleSheet.create({
         resizeMode:'contain',
         margin:8
     },
+    memo:{
+        borderRadius: 25,
+    }
 });
 
 interface Props {
@@ -63,13 +66,16 @@ export default function Input(props:Props) {
     const title = useControlledComponent('');
     const price = useControlledComponent('');
     const url = useControlledComponent('');
-    const imageUrl = useControlledComponent('');
+    const image1 = useControlledComponent('');
+    const image2 = useControlledComponent('');
+    const image3 = useControlledComponent('');
+    const memo = useControlledComponent('');
 
     const onChangeUrl = React.useCallback((newValue) => {
         url.onChangeText(newValue);
 
         const image = fetchImageUrl(newValue);
-        imageUrl.onChangeText(image);
+        image1.onChangeText(image);
     },[]);
 
     const onSubmit = React.useCallback(async () => {
@@ -77,16 +83,16 @@ export default function Input(props:Props) {
             title:title.value,
             price:price.value,
             url:url.value,
-            imageUrl:imageUrl.value,
+            imageUrl:image1.value,
             detail:"",
         });
 
         goBack();
         title.onChangeText("");
         price.onChangeText("");
-    },[goBack,title,price,url,imageUrl]);
+    },[goBack,title,price,url,image1]);
 
-    const pickImage = async () => {
+    const pickImage1 = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
             allowsEditing: true,
@@ -97,7 +103,37 @@ export default function Input(props:Props) {
         console.log(result);
 
         if (!result.cancelled) {
-            imageUrl.onChangeText(result.uri);
+            image1.onChangeText(result.uri);
+        }
+    };
+
+    const pickImage2 = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1,
+        });
+
+        console.log(result);
+
+        if (!result.cancelled) {
+            image2.onChangeText(result.uri);
+        }
+    };
+
+    const pickImage3 = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1,
+        });
+
+        console.log(result);
+
+        if (!result.cancelled) {
+            image3.onChangeText(result.uri);
         }
     };
 
@@ -120,16 +156,17 @@ export default function Input(props:Props) {
                     <TextField value={price.value} placeholder="価格" onChangeText={price.onChangeText} secureTextEntry={false} keyboardType="numeric" style={styles.text}/>
                     <TextField value={url.value} placeholder="販売サイト" onChangeText={onChangeUrl} secureTextEntry={false} style={styles.text}/>
                     <View style={styles.imageContainer}>
-                        <TouchableOpacity onPress={pickImage}>
-                            <Image source={{ uri: imageUrl.value }} style={styles.image}/>
+                        <TouchableOpacity onPress={pickImage1}>
+                            <Image source={ image1.value == "" ? require("../../../../assets/camera.png") : { uri: image1.value }} style={styles.image}/>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={pickImage}>
-                            <Image source={{ uri: imageUrl.value }} style={styles.image}/>
+                        <TouchableOpacity onPress={pickImage2}>
+                            <Image source={ image2.value == "" ? require("../../../../assets/camera.png") : { uri: image2.value }} style={styles.image}/>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={pickImage}>
-                            <Image source={{ uri: imageUrl.value }} style={styles.image}/>
+                        <TouchableOpacity onPress={pickImage3}>
+                            <Image source={ image3.value == "" ? require("../../../../assets/camera.png") : { uri: image3.value }} style={styles.image}/>
                         </TouchableOpacity>
                     </View>
+                    <TextField value={memo.value} placeholder="メモ" textStyle={{minHeight: 150}} onChangeText={memo.onChangeText} secureTextEntry={false} multiline={true} style={styles.memo}/>
                     <Button label="登録" onPress={onSubmit}/>
                 </View>
             </SafeAreaView>
