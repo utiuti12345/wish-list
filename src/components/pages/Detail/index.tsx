@@ -67,8 +67,7 @@ export default function Detail(props:Props) {
     const title = useControlledComponent(titleInitialValue);
     const price = useControlledComponent(priceInitialValue);
     const url = useControlledComponent(urlInitialValue);
-    const imageUrl = useControlledComponent(imageUrlInitialValue);
-    const image1 = useControlledComponent('');
+    const image1 = useControlledComponent(imageUrlInitialValue);
     const image2 = useControlledComponent('');
     const image3 = useControlledComponent('');
     const memo = useControlledComponent('');
@@ -76,8 +75,8 @@ export default function Detail(props:Props) {
     const onChangeUrl = useCallback((newValue) => {
         url.onChangeText(newValue);
         const image = fetchImageUrl(newValue);
-        imageUrl.onChangeText(image);
-    },[url,imageUrl]);
+        image1.onChangeText(image);
+    },[url,image1]);
 
     const onSubmit = useCallback( async () => {
         console.log(url.value);
@@ -87,12 +86,12 @@ export default function Detail(props:Props) {
                 title:title.value,
                 price:price.value,
                 url:url.value,
-                imageUrl:imageUrl.value,
+                imageUrl:image1.value,
                 detail:"",
         });
 
         goBack();
-    },[title.value,price.value,url.value,imageUrl.value,goBack]);
+    },[title.value,price.value,url.value,image1.value,goBack]);
 
     const pickImage1 = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
