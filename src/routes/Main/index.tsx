@@ -2,11 +2,12 @@ import React from "react";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import {createStackNavigator,StackCardInterpolationProps} from "@react-navigation/stack";
 import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
-import {HOME, INPUT, LOADING, SIGN_IN, USER_INFO} from "../../constants/path";
+import {HOME, INPUT, LOADING, SIGN_IN, USER_INFO, WISH_LIST} from "../../constants/path";
 import {UserInfo} from "../../components/pages";
 import {Input,SignIn,Loading} from "../../containers";
 import * as UiContext from "../../contexts/ui";
 import Home from "./Home";
+import WishLists from "./WishLists";
 import Icon from "../../components/atoms/Icon";
 import {StyleSheet} from "react-native";
 import {COLOR} from "../../constants/theme";
@@ -43,10 +44,16 @@ function TabRoutes() {
                            },
                        }}
         >
+            <Tab.Screen name={WISH_LIST} component={WishLists} options={{
+                tabBarLabel: 'Wish',
+                tabBarIcon: () => (
+                    <Icon name="gift-outline" fill="#8F9BB3" style={styles.icon}/>
+                ),
+            }}/>
             <Tab.Screen name={HOME} component={Home} options={{
                 tabBarLabel: 'Home',
                 tabBarIcon: () => (
-                    <Icon name="gift-outline" fill="#8F9BB3" style={styles.icon}/>
+                    <Icon name="home-outline" fill="#8F9BB3" style={styles.icon}/>
                 ),
             }}/>
             <Tab.Screen name={USER_INFO} component={UserInfo} options={{

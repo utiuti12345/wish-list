@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
         height:100,
         borderRadius:10,
         borderWidth:2,
-        borderColor:'#d35647',
+        borderColor: COLOR.WHITE,
         resizeMode:'contain',
         margin:8
     },

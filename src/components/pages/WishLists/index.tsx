@@ -17,14 +17,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    profileContainer: {
-        alignSelf: "flex-start",
-        alignItems: "center",
-        flexDirection: "row",
-        marginTop: 20,
-        marginLeft: 40,
-        marginBottom: 40,
-    },
     wishListHeaderContainer: {
         alignSelf: "flex-start",
         alignItems: "center",
@@ -52,8 +44,7 @@ export interface Props {
     wishList:ArrayState;
 }
 
-export default function Home(props:Props) {
-    const {userState} = React.useContext(UserContext);
+export default function WishLists(props:Props) {
     const {wishList} = props;
 
     const {navigate} = useNavigation();
@@ -64,20 +55,8 @@ export default function Home(props:Props) {
         navigate(DETAIL,state);
     },[navigate]);
 
-    if(!userState){
-        return null;
-    }
-
-    const source = userState.photoUrl == null ? require("../../../../assets/person.png") : userState.photoUrl;
-
     return(
         <SafeAreaView style={styles.container}>
-            <View style={styles.profileContainer}>
-                <Avatar source={source}/>
-                <View style={styles.nameContainer}>
-                    <Text style={styles.nameText}>{userState.mailAddress}</Text>
-                </View>
-            </View>
             <View style={styles.wishListHeaderContainer}>
                 <Text style={{color:COLOR.BLACK}}>Wishlist</Text>
                 <View style={{ flex: 1 }} />

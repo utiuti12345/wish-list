@@ -1,13 +1,14 @@
 import React from "react";
 import {Image, StyleSheet,TouchableOpacity} from "react-native";
+import {COLOR} from "../../constants/theme";
 
 const styles = StyleSheet.create({
     image:{
-        width:150,
-        height:150,
+        width:180,
+        height:180,
         borderRadius:10,
         borderWidth:2,
-        borderColor:'#d35647',
+        borderColor: COLOR.WHITE,
         resizeMode:'contain',
         margin:8
     }
