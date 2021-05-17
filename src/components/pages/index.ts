@@ -5,4 +5,4 @@ export {default as SignUp} from './SignUp';
 export {default as UserInfo} from './UserInfo';
 export {default as Detail} from './Detail';
 export {default as Input} from './Input';
-export {default as WishLists} from './WishLists';
+export {default as WishList} from './WishList';

@@ -7,7 +7,7 @@ import {UserInfo} from "../../components/pages";
 import {Input,SignIn,Loading} from "../../containers";
 import * as UiContext from "../../contexts/ui";
 import Home from "./Home";
-import WishLists from "./WishLists";
+import WishList from "./WishList";
 import Icon from "../../components/atoms/Icon";
 import {StyleSheet} from "react-native";
 import {COLOR} from "../../constants/theme";
@@ -44,7 +44,7 @@ function TabRoutes() {
                            },
                        }}
         >
-            <Tab.Screen name={WISH_LIST} component={WishLists} options={{
+            <Tab.Screen name={WISH_LIST} component={WishList} options={{
                 tabBarLabel: 'Wish',
                 tabBarIcon: () => (
                     <Icon name="gift-outline" fill="#8F9BB3" style={styles.icon}/>

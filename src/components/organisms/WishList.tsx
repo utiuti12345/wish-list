@@ -16,7 +16,8 @@ export default function WishList(props:Props) {
         <FlatList
             data={wishList}
             numColumns={2}
-            renderItem={ ({ item, index }) => (<Wish wish={item} gotoDetail={gotoDetail}/>
+            renderItem={ ({ item, index }) => (
+                <Wish wish={item} gotoDetail={gotoDetail}/>
             )}
         />
     )

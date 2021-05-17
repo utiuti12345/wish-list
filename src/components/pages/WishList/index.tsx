@@ -3,7 +3,7 @@ import {Pressable, SafeAreaView, ScrollView, StyleSheet, Text, View} from "react
 import {State} from "../../molecules/Wish";
 import {useNavigation} from "@react-navigation/native";
 import {Avatar} from "../../atoms";
-import {WishList} from "../../organisms";
+import {WishList as Wishlist} from "../../organisms";
 import {DETAIL, INPUT} from "../../../constants/path";
 import {IconButton} from "../../molecules";
 import {ArrayState} from "../../organisms/WishList";
@@ -44,7 +44,7 @@ export interface Props {
     wishList:ArrayState;
 }
 
-export default function WishLists(props:Props) {
+export default function WishList(props:Props) {
     const {wishList} = props;
 
     const {navigate} = useNavigation();
@@ -63,7 +63,7 @@ export default function WishLists(props:Props) {
                 <IconButton name="plus-circle" fill="#8F9BB3" style={styles.icon} onPress={onPress}/>
             </View>
             <ScrollView style={{flex:1}}>
-                <WishList wishList={wishList} gotoDetail={gotoDetail}/>
+                <Wishlist wishList={wishList} gotoDetail={gotoDetail}/>
             </ScrollView>
         </SafeAreaView>
     )
