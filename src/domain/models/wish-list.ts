@@ -29,3 +29,17 @@ export function update(wishList:Model,id:string,newValue:Wish.Values){
         [id]:Wish.update(wishList[id],newValue)
     }
 }
+
+export function remove(wishList:Model,id:string){
+    return Object.entries(wishList).reduce(
+        (result,[key,value]) => {
+            if(id === key){
+                return result;
+            }
+
+            return {
+                ...result,
+                [key]:value,
+            };
+        }, {});
+}

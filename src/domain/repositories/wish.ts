@@ -30,3 +30,12 @@ export function update(userId:string,id:string, newWish:Wish.Values){
            throw e;
         });
 }
+
+export function remove(userId:string,id:string){
+    firestore(userId)
+        .doc(id)
+        .delete()
+        .catch(e => {
+            throw e;
+        })
+}

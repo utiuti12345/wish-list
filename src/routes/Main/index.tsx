@@ -42,6 +42,7 @@ function TabRoutes() {
                            style: {
                                backgroundColor: '#333333',
                            },
+                           showLabel:false
                        }}
         >
             <Tab.Screen name={WISH_LIST} component={WishList} options={{
