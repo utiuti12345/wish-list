@@ -33,12 +33,16 @@ interface Props {
 export default function Wish(props:Props) {
     const {wish,gotoDetail} = props;
 
+    const onLongPress = React.useCallback(() => {
+        console.log("onLongPress");
+    },[]);
+
     const onPress = React.useCallback(() => {
         gotoDetail(wish);
     },[wish,gotoDetail]);
 
     return(
-        <TouchableOpacity onPress={onPress}>
+        <TouchableOpacity onLongPress={onLongPress} onPress={onPress}>
             <Image source={{ uri: wish.imageUrl }}
                    key={wish.id}
                    style={styles.image}

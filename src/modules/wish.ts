@@ -9,6 +9,7 @@ export type State = ReturnType<typeof createInitialState>;
 export const SET = 'wish/set' as const;
 export const ADD = 'wish/add' as const;
 export const UPDATE = 'wish/update' as const;
+export const REMOVE = 'wish/remove' as const;
 
 export function set(wishList:WishList.Model) {
     return{
@@ -38,9 +39,19 @@ export function update(id:string,updateValues:Wish.Values) {
     }
 }
 
+export function remove(id:string) {
+    return{
+        type:REMOVE,
+        payload:{
+            id,
+        }
+    }
+}
+
 export type Action = | Readonly<ReturnType<typeof set>>
                     | Readonly<ReturnType<typeof add>>
                     | Readonly<ReturnType<typeof update>>
+                    | Readonly<ReturnType<typeof remove>>
 
 export default function reducer(state= createInitialState(),action:Action){
     switch (action.type) {
@@ -50,6 +61,8 @@ export default function reducer(state= createInitialState(),action:Action){
             return WishList.add(state,action.payload.wish);
         case UPDATE:
             return WishList.update(state,action.payload.id,action.payload.updateValues);
+        case REMOVE:
+            return WishList.remove(state,action.payload.id);
         default:
             return state;
     }
