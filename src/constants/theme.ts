@@ -8,4 +8,5 @@ export const COLOR = {
     BLACK:'#222',
     CAROUSEL_BACKGROUND:'rgba(0,0,0,0.5)',
     CAUTION:'#ff0000',
+    TRANSPARENT:'rgba(0,0,0,0.3)',
 };

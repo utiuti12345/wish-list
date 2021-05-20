@@ -42,10 +42,13 @@ const styles = StyleSheet.create({
 
 export interface Props {
     wishList:ArrayState;
+    actions:{
+        removeWish:(id:string) => void;
+    }
 }
 
 export default function WishList(props:Props) {
-    const {wishList} = props;
+    const {wishList,actions} = props;
 
     const {navigate} = useNavigation();
     const onPress = React.useCallback(() => {
@@ -63,7 +66,7 @@ export default function WishList(props:Props) {
                 <IconButton name="plus-circle" fill="#8F9BB3" style={styles.icon} onPress={onPress}/>
             </View>
             <ScrollView style={{flex:1}}>
-                <Wishlist wishList={wishList} gotoDetail={gotoDetail}/>
+                <Wishlist wishList={wishList} gotoDetail={gotoDetail} removeWish={actions.removeWish}/>
             </ScrollView>
         </SafeAreaView>
     )

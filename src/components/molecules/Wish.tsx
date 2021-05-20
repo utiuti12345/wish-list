@@ -1,6 +1,7 @@
 import React from "react";
 import {Image, StyleSheet,TouchableOpacity} from "react-native";
 import {COLOR} from "../../constants/theme";
+import WishImage from "../atoms/WishImage";
 
 const styles = StyleSheet.create({
     image:{
@@ -28,14 +29,15 @@ export interface GotoDetail{
 interface Props {
     wish:State;
     gotoDetail:GotoDetail;
+    removeWish:(id:string) => void;
 }
 
 export default function Wish(props:Props) {
-    const {wish,gotoDetail} = props;
+    const {wish,gotoDetail,removeWish} = props;
 
     const onLongPress = React.useCallback(() => {
-        console.log("onLongPress");
-    },[]);
+        removeWish(wish.id);
+    },[removeWish]);
 
     const onPress = React.useCallback(() => {
         gotoDetail(wish);
@@ -43,10 +45,11 @@ export default function Wish(props:Props) {
 
     return(
         <TouchableOpacity onLongPress={onLongPress} onPress={onPress}>
-            <Image source={{ uri: wish.imageUrl }}
-                   key={wish.id}
-                   style={styles.image}
-            />
+            <WishImage wish={wish}/>
+            {/*<Image source={{ uri: wish.imageUrl }}*/}
+            {/*       key={wish.id}*/}
+            {/*       style={styles.image}*/}
+            {/*/>*/}
         </TouchableOpacity>
     )
 }
