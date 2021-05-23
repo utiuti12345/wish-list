@@ -7,8 +7,52 @@ import * as LocalStore from "../../../lib/local-store";
 import signOut from "../../../lib/firebase/sign-out";
 import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
+import {transform} from "@babel/core";
+
+const animatedValue = new Animated.Value(0);
+
+const coverMov = animatedValue.interpolate({
+    inputRange: [0, 94, 95],
+    outputRange: [0, -94, -94]
+});
+
+const avatarMov = animatedValue.interpolate({
+    inputRange: [0, 150, 151],
+    outputRange: [0, -150, -150]
+});
+
+const avatarOp = animatedValue.interpolate({
+    inputRange: [0, 94, 95],
+    outputRange: [1, 0, 0]
+});
+
+const headerOp = animatedValue.interpolate({
+    inputRange: [95, 180, 181],
+    outputRange: [0, 0.75, 0.75]
+});
+
+const headerContentOp = animatedValue.interpolate({
+    inputRange: [0, 180, 210],
+    outputRange: [0, 0, 1]
+});
 
 const styles = StyleSheet.create({
+    animatedCoverImage:{
+        marginTop: Constants.statusBarHeight,
+        width: "100%",
+        height: 150,
+        zIndex: 2,
+        position: "absolute",
+    },
+    animatedView:{
+        width: "100%",
+        position: "absolute",
+        backgroundColor: "#121212",
+        height: 56 + Constants.statusBarHeight,
+        zIndex: 13,
+        paddingTop: Constants.statusBarHeight,
+        alignItems: "center"
+    },
     header: {
         paddingTop: 5,
         paddingBottom: 5,
@@ -18,7 +62,6 @@ const styles = StyleSheet.create({
         backgroundColor: "white"
     },
     headerButton: {
-        // alignSelf: "flex-end",
         paddingLeft: 7,
         paddingRight: 7,
         paddingBottom: 3,
@@ -85,56 +128,16 @@ export default function UserInfo() {
     const source = image == '' ? require("../../../../assets/person.png") : image;
     const imageBackground = {uri: "https://reactjs.org/logo-og.png"};
 
-    const animatedValue = new Animated.Value(0);
 
-    const coverMov = animatedValue.interpolate({
-        inputRange: [0, 94, 95],
-        outputRange: [0, -94, -94]
-    });
-
-    const avatarMov = animatedValue.interpolate({
-        inputRange: [0, 150, 151],
-        outputRange: [0, -150, -150]
-    });
-    const avatarOp = animatedValue.interpolate({
-        inputRange: [0, 94, 95],
-        outputRange: [1, 0, 0]
-    });
-
-    const headerOp = animatedValue.interpolate({
-        inputRange: [95, 180, 181],
-        outputRange: [0, 0.75, 0.75]
-    });
-
-    const headerContentOp = animatedValue.interpolate({
-        inputRange: [0, 180, 210],
-        outputRange: [0, 0, 1]
-    });
 
     return (
-        <SafeAreaView style={{flex: 1}}>
+        <View style={{flex: 1}}>
             <Animated.Image
                 source={{uri: "https://reactjs.org/logo-og.png"}}
-                style={{
-                    marginTop: Constants.statusBarHeight,
-                    width: "100%",
-                    height: 150,
-                    zIndex: 2,
-                    position: "absolute",
-                    transform: [{translateY: coverMov}]
-                }}
+                style={[styles.animatedCoverImage,{transform:[{translateY:coverMov}]}]}
             />
             <Animated.View
-                style={{
-                    width: "100%",
-                    position: "absolute",
-                    backgroundColor: "#121212",
-                    height: 56 + Constants.statusBarHeight,
-                    zIndex: 13,
-                    opacity: headerOp,
-                    paddingTop: Constants.statusBarHeight,
-                    alignItems: "center"
-                }}
+                style={[styles.animatedView,{opacity:headerOp}]}
             >
                 <Animated.View
                     style={{
@@ -155,9 +158,14 @@ export default function UserInfo() {
                     transform: [{translateY: avatarMov}]
                 }}
             >
-                <TouchableOpacity onPress={pickImage}>
-                    <Avatar source={{uri: source}}/>
-                </TouchableOpacity>
+                <View style={{
+                    marginLeft:20,
+                    marginTop:20
+                }}>
+                    <TouchableOpacity onPress={pickImage}>
+                        <Avatar size={100} source={{uri: source}}/>
+                    </TouchableOpacity>
+                </View>
             </Animated.View>
 
             <Animated.ScrollView
@@ -180,7 +188,7 @@ export default function UserInfo() {
                     ])}
                 >
                     <View style={{flexDirection: "row", justifyContent: "flex-end"}}>
-
+                        <Button onPress={SignOut} label="SignOut"/>
                     </View>
                 </View>
 
@@ -189,7 +197,6 @@ export default function UserInfo() {
                     <Text style={styles.usernameText}>{userState.mailAddress}</Text>
                     <Text style={styles.bioText}>aaaaa</Text>
                     <Text style={styles.locationText}>
-
 
                     </Text>
                     <View style={{flexDirection: "row", marginTop: 10}}>
@@ -213,10 +220,9 @@ export default function UserInfo() {
                                 Followers
                             </Text>
                         </View>
-                        <Button onPress={SignOut} label="SignOut"/>
                     </View>
                 </View>
             </Animated.ScrollView>
-        </SafeAreaView>
+        </View>
     );
 }
