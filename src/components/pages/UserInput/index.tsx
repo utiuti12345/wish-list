@@ -1,14 +1,13 @@
 import React from "react";
 import {SafeAreaView, StyleSheet, Text, TouchableOpacity, Image, View, ImageBackground, Animated} from "react-native";
-import {Avatar, Button} from "../../atoms";
+import {Avatar, Button, TextField} from "../../atoms";
 import {UiContext, UserContext} from "../../../contexts";
 import {Status} from "../../../contexts/ui";
 import * as LocalStore from "../../../lib/local-store";
 import signOut from "../../../lib/firebase/sign-out";
 import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
-import {DETAIL, USER_INPUT} from "../../../constants/path";
-import {useNavigation} from "@react-navigation/native";
+import useControlledComponent from "../../../lib/hooks/use-controlled-component";
 
 const animatedValue = new Animated.Value(0);
 
@@ -83,45 +82,29 @@ const styles = StyleSheet.create({
         paddingTop: 3,
         marginRight: 8
     },
-    nameText: {
-        fontSize: 26,
-        fontWeight: "500",
-        marginLeft: 14
-    },
-    usernameText: {
-        color: "#777",
-        fontSize: 16,
-        marginLeft: 14
-    },
-    bioText: {
-        fontSize: 16,
-        marginLeft: 14,
-        marginTop: 10,
-        maxHeight: 41
-    },
-    locationText: {
-        fontSize: 16,
-        marginLeft: 14,
-        marginTop: 10,
-        color: "#555"
+    text:{
+        borderRadius: 25,
     },
 })
 
 export default function UserInfo() {
     const {userState, setUserState} = React.useContext(UserContext);
     const {setApplicationState} = React.useContext(UiContext);
-    const {navigate} = useNavigation();
 
-    // const SignOut = async () => {
-    //     await signOut();
-    //     setUserState(null);
-    //     await LocalStore.UserInformation.clear();
-    //     setApplicationState(Status.UN_AUTHORIZED);
-    // };
+    const SignOut = async () => {
+        await signOut();
+        setUserState(null);
+        await LocalStore.UserInformation.clear();
+        setApplicationState(Status.UN_AUTHORIZED);
+    };
 
-    const editUserInfo = React.useCallback(() =>{
-        navigate(USER_INPUT);
-    },[])
+    if (!userState) {
+        return null;
+    }
+
+    const name = useControlledComponent(userState.name == null ? '' : userState.name);
+    const photoImage = useControlledComponent(userState?.photoImage);
+    const backgroundImage = useControlledComponent(userState?.backgroundImage);
 
     const pickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
@@ -134,26 +117,21 @@ export default function UserInfo() {
         console.log(result);
 
         if (!result.cancelled) {
-            setImage(result.uri);
+            photoImage.onChangeText(result.uri);
         }
     };
 
-    if (!userState) {
-        return null;
-    }
-
-    const {name, mailAddress, photoImage} = userState;
-    const [image, setImage] = React.useState(photoImage ? '' : photoImage);
-
-    const source = image == '' ? require("../../../../assets/person.png") : image;
-    const imageBackground = {uri: "https://reactjs.org/logo-og.png"};
+    const source = photoImage.value == '' ? require("../../../../assets/person.png") : photoImage.value;
+    const backgroundSource = backgroundImage.value == '' ? {uri: "https://reactjs.org/logo-og.png"} : backgroundImage.value;
 
     return (
         <View style={{flex: 1}}>
-            <Animated.Image
-                source={imageBackground}
-                style={[styles.animatedImage,{transform:[{translateY:coverMov}]}]}
-            />
+            <TouchableOpacity onPress={() => console.log("aaaaa")}>
+                <Animated.Image
+                    source={backgroundSource}
+                    style={[styles.animatedImage,{transform:[{translateY:coverMov}]}]}
+                />
+            </TouchableOpacity>
             <Animated.View style={[styles.animatedViewHeader,{opacity:headerOp}]}>
                 <Animated.View style={[styles.animatedViewHeaderContent,{opacity: headerContentOp,}]}>
                 </Animated.View>
@@ -161,7 +139,7 @@ export default function UserInfo() {
             <Animated.View style={[styles.animatedViewAvatar,{opacity: avatarOp, transform: [{translateY: avatarMov}]}]}>
                 <View style={styles.avatarContainer}>
                     <TouchableOpacity onPress={pickImage}>
-                        <Avatar size={100} source={{uri: source}}/>
+                        <Avatar size={100} source={source}/>
                     </TouchableOpacity>
                 </View>
             </Animated.View>
@@ -186,39 +164,13 @@ export default function UserInfo() {
                     ])}
                 >
                     <View style={{flexDirection: "row", justifyContent: "flex-end"}}>
-                        <Button onPress={editUserInfo} label="編集"/>
+                        <Button onPress={SignOut} label="SignOut"/>
                     </View>
                 </View>
 
                 <View style={styles.header}>
-                    <Text style={styles.nameText}>{name}</Text>
-                    <Text style={styles.usernameText}>{mailAddress}</Text>
-                    <Text style={styles.bioText}>aaaaa</Text>
-                    <Text style={styles.locationText}>
-
-                    </Text>
-                    <View style={{flexDirection: "row", marginTop: 10}}>
-                        <View style={{flexDirection: "row"}}>
-                            <Text
-                                style={{fontSize: 16, fontWeight: "bold", marginLeft: 14}}
-                            >
-                                12
-                            </Text>
-                            <Text style={{fontSize: 16, color: "#555", marginLeft: 5}}>
-                                Following
-                            </Text>
-                        </View>
-                        <View style={{flexDirection: "row"}}>
-                            <Text
-                                style={{fontSize: 16, fontWeight: "bold", marginLeft: 30}}
-                            >
-                                13
-                            </Text>
-                            <Text style={{fontSize: 16, color: "#555", marginLeft: 5}}>
-                                Followers
-                            </Text>
-                        </View>
-                    </View>
+                    <TextField value={name.value} placeholder="タイトル" onChangeText={name.onChangeText} secureTextEntry={false} style={styles.text}/>
+                    <Button label="登録" onPress={() => console.log("aaaaaa")}/>
                 </View>
             </Animated.ScrollView>
         </View>

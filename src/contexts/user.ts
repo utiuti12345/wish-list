@@ -4,7 +4,8 @@ export interface User {
     id:string;
     name:string | null;
     mailAddress:string | null;
-    photoUrl:string | null;
+    photoImage:string | null;
+    backgroundImage:string | null;
     createdAt:number | null;
     lastLoginAt:number | null;
 }

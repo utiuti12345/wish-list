@@ -6,3 +6,4 @@ export {default as UserInfo} from './UserInfo';
 export {default as Detail} from './Detail';
 export {default as Input} from './Input';
 export {default as WishList} from './WishList';
+export {default as UserInput} from './UserInput';

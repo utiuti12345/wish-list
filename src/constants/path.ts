@@ -7,3 +7,4 @@ export const USER_INFO = 'USER_INFO';
 export const INPUT = 'INPUT';
 export const LOADING = 'LOADING';
 export const WISH_LIST = 'WISH_LIST';
+export const USER_INPUT = 'USER_INPUT'

@@ -141,7 +141,7 @@ export default function Input(props:Props) {
         return null;
     }
 
-    const source = userState.photoUrl == null ? require("../../../../assets/person.png") : userState.photoUrl;
+    const source = userState.photoImage == null ? require("../../../../assets/person.png") : userState.photoImage;
 
     return (
         <TouchableWithoutFeedback onPress={dismiss} style={styles.container}>

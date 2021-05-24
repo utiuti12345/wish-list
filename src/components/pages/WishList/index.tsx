@@ -2,7 +2,7 @@ import React from "react";
 import {Pressable, SafeAreaView, ScrollView, StyleSheet, Text, View} from "react-native";
 import {State} from "../../molecules/Wish";
 import {useNavigation} from "@react-navigation/native";
-import {Avatar} from "../../atoms";
+import {Avatar, TextField} from "../../atoms";
 import {WishList as Wishlist} from "../../organisms";
 import {DETAIL, INPUT} from "../../../constants/path";
 import {IconButton} from "../../molecules";
@@ -34,6 +34,10 @@ const styles = StyleSheet.create({
         color: COLOR.BLACK,
         fontSize: 20,
     },
+    text:{
+        borderRadius: 25,
+        width:250,
+    },
     icon: {
         width: 32,
         height: 32,
@@ -51,6 +55,13 @@ export default function WishList(props:Props) {
     const {wishList,actions} = props;
 
     const {navigate} = useNavigation();
+
+    const [search,setSearch] = React.useState("");
+    const filter = React.useCallback(() => {
+
+    },[]);
+
+
     const onPress = React.useCallback(() => {
         navigate(INPUT)
     },[navigate]);
@@ -61,7 +72,7 @@ export default function WishList(props:Props) {
     return(
         <SafeAreaView style={styles.container}>
             <View style={styles.wishListHeaderContainer}>
-                <Text style={{color:COLOR.BLACK}}>Wishlist</Text>
+                <TextField value={search} placeholder="検索文字" onChangeText={setSearch} secureTextEntry={false} style={styles.text}/>
                 <View style={{ flex: 1 }} />
                 <IconButton name="plus-circle" fill="#8F9BB3" style={styles.icon} onPress={onPress}/>
             </View>
