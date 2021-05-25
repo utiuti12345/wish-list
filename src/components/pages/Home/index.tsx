@@ -68,7 +68,7 @@ export default function Home(props:Props) {
         return null;
     }
 
-    const source = userState.photoUrl == null ? require("../../../../assets/person.png") : userState.photoUrl;
+    const source = userState.photoImage == null ? require("../../../../assets/person.png") : userState.photoImage;
 
     return(
         <SafeAreaView style={styles.container}>
@@ -84,7 +84,6 @@ export default function Home(props:Props) {
                 <IconButton name="plus-circle" fill="#8F9BB3" style={styles.icon} onPress={onPress}/>
             </View>
             <ScrollView style={{flex:1}}>
-                <WishList wishList={wishList} gotoDetail={gotoDetail}/>
             </ScrollView>
         </SafeAreaView>
     )
